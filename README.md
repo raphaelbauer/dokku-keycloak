@@ -30,11 +30,11 @@ In CLI commands this will look roughly that way
 dokku apps:create keycloak
 dokku config:set keycloak KC_HOSTNAME=keycloak.example.com
 dokku config:set keycloak KEYCLOAK_ADMIN=admin KEYCLOAK_ADMIN_PASSWORD=YOUR_VERY_SECRET_AND_LONG_PASSWORD
-dokku config:set keycloak KC_HTTP_PORT=80 KC_HTTPS_PORT=443
 dokku config:set keycloak KC_PROXY=edge # Nginx manages SSL. No encryption between keycloak and nginx.
 dokku postgres:create keycloakdb
 dokku postgres:link keycloakdb keycloak
 dokku domains:add keycloak keycloak.example.com
+dokku ports:add keycloak https:443:8443 http:80:8080
 
 # Then let's get the keycloak docker repo
 git clone git@github.com:raphaelbauer/dokku-keycloak.git
