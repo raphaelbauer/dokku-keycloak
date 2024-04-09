@@ -1,8 +1,8 @@
 # Deploy Keycloak to Dokku
 
 This works for
-- dokku version 0.31
-- keycloak 22.0.1
+- dokku version 0.34.2
+- keycloak 24.0.2
 
 ## Intro
 
@@ -30,10 +30,11 @@ In CLI commands this will look roughly that way
 dokku apps:create keycloak
 dokku config:set keycloak KC_HOSTNAME=keycloak.example.com
 dokku config:set keycloak KEYCLOAK_ADMIN=admin KEYCLOAK_ADMIN_PASSWORD=YOUR_VERY_SECRET_AND_LONG_PASSWORD
+dokku config:set keycloak KC_HTTP_PORT=80 KC_HTTPS_PORT=443
+dokku config:set keycloak KC_PROXY=edge # Nginx manages SSL. No encryption between keycloak and nginx.
 dokku postgres:create keycloakdb
 dokku postgres:link keycloakdb keycloak
 dokku domains:add keycloak keycloak.example.com
-dokku letsencrypt:enable keycloak
 
 # Then let's get the keycloak docker repo
 git clone git@github.com:raphaelbauer/dokku-keycloak.git
@@ -44,4 +45,7 @@ git push dokku
 # Back on your dokku server remove the admin password from the 
 # env variables - they are only needed for the initial startup
 dokku config:unset keycloak KEYCLOAK_ADMIN KEYCLOAK_ADMIN_PASSWORD
+
+# Finally, let's configure SSL:
+dokku letsencrypt:enable keycloak
 ```
