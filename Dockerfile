@@ -1,4 +1,4 @@
-FROM quay.io/keycloak/keycloak:22.0.3
+FROM quay.io/keycloak/keycloak:26.0.2
 
 COPY dokku-kc.sh /opt/keycloak/bin
 

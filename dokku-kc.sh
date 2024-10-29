@@ -19,7 +19,12 @@ then
         echo "[INFO] KC_DB_URL_HOST=$KC_DB_URL_HOST, KC_DB_URL_PORT=$KC_DB_URL_PORT, KC_DB_URL_DATABASE=$KC_DB_URL_DATABASE, KC_DB_USERNAME=$KC_DB_USERNAME, KC_DB_PASSWORD=$KC_DB_PASSWORD"
         
         export KC_DB=postgres
-        export KC_PROXY=edge # Nginx manages SSL. No encryption between keycloak and nginx.
+
+        # Nginx manages SSL. No encryption between keycloak and nginx.
+        # This was KC_PROXY=edge in older versions
+        # See also https://github.com/keycloak/keycloak/issues/29665
+        export KC_PROXY_HEADERS=xforwarded
+        export KC_HTTP_ENABLED=true
     fi
 
 else
