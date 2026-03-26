@@ -1,8 +1,8 @@
 # Deploy Keycloak to Dokku
 
 This works for
-- dokku version 0.35
-- keycloak 26.0.2
+- dokku version 0.37
+- keycloak 26.5.6
 
 ## Intro
 
@@ -44,4 +44,14 @@ git push dokku
 # Back on your dokku server remove the admin password from the 
 # env variables - they are only needed for the initial startup
 dokku config:unset keycloak KEYCLOAK_ADMIN KEYCLOAK_ADMIN_PASSWORD
+```
+
+## Upgrade your server to a new version
+
+```
+# Get latest version of this container
+git pull origin
+
+# Push the new version - this will update the keycloak on your server
+git push dokku
 ```
