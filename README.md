@@ -1,8 +1,8 @@
 # Deploy Keycloak to Dokku
 
 This works for
-- dokku version 0.37
-- keycloak 26.5.6
+- dokku version v0.38
+- keycloak 26.8
 
 ## Intro
 
